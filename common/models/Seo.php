@@ -26,8 +26,8 @@ class Seo extends ActiveRecord
 			'url' => Yii::t('seo', 'Url'),
 			'title' => Yii::t('seo', 'Title'),
 			'keywords' => Yii::t('seo', 'Keywords'),
-			'description' => Yii::t('seo', 'description'),
-			'snippet' => Yii::t('seo', 'snippet'),
+			'description' => Yii::t('seo', 'Description'),
+			'snippet' => Yii::t('seo', 'Snippet'),
 		];
 	}
 
