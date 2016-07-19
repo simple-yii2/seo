@@ -109,6 +109,9 @@ class SeoForm extends Model {
 		if ($this->object === null)
 			return false;
 
+		if (!$this->validate())
+			return false;
+
 		$object = $this->object;
 
 		$object->setAttributes([
