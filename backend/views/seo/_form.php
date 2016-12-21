@@ -10,7 +10,7 @@ use yii\helpers\Html;
 	'options' => ['class' => 'seo-form'],
 ]); ?>
 
-	<?= $form->field($model, 'url') ?>
+	<?= $form->field($model, 'path') ?>
 
 	<?= $form->field($model, 'title') ?>
 

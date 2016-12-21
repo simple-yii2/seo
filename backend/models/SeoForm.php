@@ -14,9 +14,9 @@ class SeoForm extends Model
 {
 
 	/**
-	 * @var string Url.
+	 * @var string Path.
 	 */
-	public $url;
+	public $path;
 
 	/**
 	 * @var string Title.
@@ -47,7 +47,7 @@ class SeoForm extends Model
 		$this->_object = $object;
 
 		//attributes
-		$this->url = $object->url;
+		$this->path = $object->path;
 		$this->title = $object->title;
 		$this->keywords = $object->keywords;
 		$this->description = $object->description;
@@ -61,7 +61,7 @@ class SeoForm extends Model
 	public function attributeLabels()
 	{
 		return [
-			'url' => Yii::t('seo', 'Url'),
+			'path' => Yii::t('seo', 'Path'),
 			'title' => Yii::t('seo', 'Title'),
 			'keywords' => Yii::t('seo', 'Keywords'),
 			'description' => Yii::t('seo', 'Description'),
@@ -74,10 +74,10 @@ class SeoForm extends Model
 	public function rules()
 	{
 		return [
-			[['url', 'description'], 'string', 'max' => 200],
+			[['path', 'description'], 'string', 'max' => 200],
 			[['title', 'keywords'], 'string', 'max' => 100],
-			['url', 'required'],
-			// ['url', 'match'],
+			['path', 'required'],
+			// ['path', 'match'],
 		];
 	}
 
@@ -92,7 +92,7 @@ class SeoForm extends Model
 
 		$object = $this->_object;
 
-		$object->url = $this->url;
+		$object->path = parse_url($this->path)['path'];
 		$object->title = empty($this->title) ? null : $this->title;
 		$object->keywords = empty($this->keywords) ? null : $this->keywords;
 		$object->description = empty($this->description) ? null : $this->description;

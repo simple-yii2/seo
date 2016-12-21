@@ -18,11 +18,7 @@ class SeoSearch extends Seo
 	 */
 	public function attributeLabels() {
 		return [
-			'url' => Yii::t('seo', 'Url'),
-			'title' => Yii::t('seo', 'Title'),
-			'keywords' => Yii::t('seo', 'Keywords'),
-			'description' => Yii::t('seo', 'Description'),
-			'snippet' => Yii::t('seo', 'Snippet'),
+			'path' => Yii::t('seo', 'Path'),
 		];
 	}
 
@@ -32,7 +28,7 @@ class SeoSearch extends Seo
 	public function rules()
 	{
 		return [
-			['url', 'string'],
+			['path', 'string'],
 		];
 	}
 
@@ -54,7 +50,7 @@ class SeoSearch extends Seo
 		if (!($this->load($params) && $this->validate())) return $dataProvider;
 
 		//search
-		$query->andFilterWhere(['like', 'url', $this->url]);
+		$query->andFilterWhere(['like', 'path', $this->path]);
 
 		return $dataProvider;
 	}

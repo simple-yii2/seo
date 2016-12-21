@@ -8,7 +8,7 @@ return [
 	'SEO not found.' => 'SEO информация не найдена.',
 	'SEO deleted successfully.' => 'SEO информация успешно удалена.',
 
-	'Url' => 'Адрес',
+	'Path' => 'Путь',
 	'Title' => 'Заголовок',
 	'Keywords' => 'Ключевые слова',
 	'Description' => 'Описание',

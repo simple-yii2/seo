@@ -14,8 +14,19 @@ class Seo extends ActiveRecord
 	/**
 	 * @inheritdoc
 	 */
-	public static function tableName() {
+	public static function tableName()
+	{
 		return 'Seo';
+	}
+
+	/**
+	 * Find SEO by url path
+	 * @param string $path 
+	 * @return Seo|null
+	 */
+	public static function findByPath($path)
+	{
+		return static::find()->andWhere(['path' => $path])->one();
 	}
 
 }

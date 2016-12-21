@@ -24,7 +24,7 @@ $this->params['breadcrumbs'] = [
 	'summary' => '',
 	'tableOptions' => ['class' => 'table table-condensed'],
 	'columns' => [
-		'url',
+		'path',
 		[
 			'class'=>'yii\grid\ActionColumn',
 			'options'=>['style'=>'width: 50px;'],
