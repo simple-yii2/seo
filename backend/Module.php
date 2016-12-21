@@ -1,6 +1,6 @@
 <?php
 
-namespace seo\backend;
+namespace cms\seo\backend;
 
 use Yii;
 

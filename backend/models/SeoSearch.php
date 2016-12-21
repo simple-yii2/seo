@@ -1,22 +1,36 @@
 <?php
 
-namespace seo\backend\models;
+namespace cms\seo\backend\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
 
-use seo\common\models\Seo;
+use cms\seo\common\models\Seo;
 
 /**
- * SEO search model.
+ * SEO search model
  */
-class SeoSearch extends Seo {
+class SeoSearch extends Seo
+{
 
 	/**
-	 * Search rules
-	 * @return array
+	 * @inheritdoc
 	 */
-	public function rules() {
+	public function attributeLabels() {
+		return [
+			'url' => Yii::t('seo', 'Url'),
+			'title' => Yii::t('seo', 'Title'),
+			'keywords' => Yii::t('seo', 'Keywords'),
+			'description' => Yii::t('seo', 'Description'),
+			'snippet' => Yii::t('seo', 'Snippet'),
+		];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
 		return [
 			['url', 'string'],
 		];
@@ -27,9 +41,10 @@ class SeoSearch extends Seo {
 	 * @param array $params Attributes array.
 	 * @return yii\data\ActiveDataProvider
 	 */
-	public function search($params) {
+	public function search($params)
+	{
 		//ActiveQuery
-		$query = Seo::find();
+		$query = static::find();
 
 		$dataProvider = new ActiveDataProvider([
 			'query'=>$query,

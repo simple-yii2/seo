@@ -1,6 +1,6 @@
 <?php
 
-namespace seo\backend\controllers;
+namespace cms\seo\backend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -8,9 +8,9 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
-use seo\backend\models\SeoForm;
-use seo\backend\models\SeoSearch;
-use seo\common\models\Seo;
+use cms\seo\backend\models\SeoForm;
+use cms\seo\backend\models\SeoSearch;
+use cms\seo\common\models\Seo;
 
 /**
  * SEO manage controller.
@@ -54,9 +54,9 @@ class SeoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model = new SeoForm;
+		$model = new SeoForm(new Seo);
 
-		if ($model->load(Yii::$app->getRequest()->post()) && $model->create()) {
+		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('seo', 'Changes saved successfully.'));
 			return $this->redirect(['index']);
 		}
@@ -77,9 +77,9 @@ class SeoController extends Controller
 		if ($object === null)
 			throw new BadRequestHttpException(Yii::t('seo', 'SEO not found.'));
 
-		$model = new SeoForm(['object' => $object]);
+		$model = new SeoForm($object);
 
-		if ($model->load(Yii::$app->getRequest()->post()) && $model->update()) {
+		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			Yii::$app->session->setFlash('success', Yii::t('seo', 'Changes saved successfully.'));
 			return $this->redirect(['index']);
 		}

@@ -1,16 +1,17 @@
 <?php
 
-namespace seo\backend\models;
+namespace cms\seo\backend\models;
 
 use Yii;
 use yii\base\Model;
 
-use seo\common\models\Seo;
+use cms\seo\common\models\Seo;
 
 /**
  * SEO editting form.
  */
-class SeoForm extends Model {
+class SeoForm extends Model
+{
 
 	/**
 	 * @var string Url.
@@ -33,46 +34,47 @@ class SeoForm extends Model {
 	public $description;
 
 	/**
-	 * @var string Snippet.
+	 * @var cms\seo\common\models\Seo
 	 */
-	public $snippet;
-
-	/**
-	 * @var seo\common\models\Seo Seo ar model
-	 */
-	public $object;
+	private $_object;
 
 	/**
 	 * @inheritdoc
+	 * @param cms\seo\common\models\Seo $object 
 	 */
-	public function init()
+	public function __construct(\cms\seo\common\models\Seo $object, $config = [])
 	{
-		parent::init();
+		$this->_object = $object;
 
-		if (($object = $this->object) !== null) {
-			$this->setAttributes($object->getAttributes(['url', 'title', 'keywords', 'description', 'snippet']), false);
-		}
+		//attributes
+		$this->url = $object->url;
+		$this->title = $object->title;
+		$this->keywords = $object->keywords;
+		$this->description = $object->description;
+
+		parent::__construct($config);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function attributeLabels() {
+	public function attributeLabels()
+	{
 		return [
 			'url' => Yii::t('seo', 'Url'),
 			'title' => Yii::t('seo', 'Title'),
 			'keywords' => Yii::t('seo', 'Keywords'),
 			'description' => Yii::t('seo', 'Description'),
-			'snippet' => Yii::t('seo', 'Snippet'),
 		];
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function rules() {
+	public function rules()
+	{
 		return [
-			[['url', 'description', 'snippet'], 'string', 'max' => 200],
+			[['url', 'description'], 'string', 'max' => 200],
 			[['title', 'keywords'], 'string', 'max' => 100],
 			['url', 'required'],
 			// ['url', 'match'],
@@ -80,47 +82,20 @@ class SeoForm extends Model {
 	}
 
 	/**
-	 * Seo creation
+	 * Save
 	 * @return boolean
 	 */
-	public function create() {
+	public function save()
+	{
 		if (!$this->validate())
 			return false;
 
-		$this->object = $object = new Seo([
-			'url' => $this->url,
-			'title' => empty($this->title) ? null : $this->title,
-			'keywords' => empty($this->keywords) ? null : $this->keywords,
-			'description' => empty($this->description) ? null : $this->description,
-			'snippet' => empty($this->snippet) ? null : $this->snippet,
-		]);
+		$object = $this->_object;
 
-		if (!$object->save(false))
-			return false;
-
-		return true;
-	}
-
-	/**
-	 * Seo updating
-	 * @return boolean
-	 */
-	public function update() {
-		if ($this->object === null)
-			return false;
-
-		if (!$this->validate())
-			return false;
-
-		$object = $this->object;
-
-		$object->setAttributes([
-			'url' => $this->url,
-			'title' => empty($this->title) ? null : $this->title,
-			'keywords' => empty($this->keywords) ? null : $this->keywords,
-			'description' => empty($this->description) ? null : $this->description,
-			'snippet' => empty($this->snippet) ? null : $this->snippet,
-		], false);
+		$object->url = $this->url;
+		$object->title = empty($this->title) ? null : $this->title;
+		$object->keywords = empty($this->keywords) ? null : $this->keywords;
+		$object->description = empty($this->description) ? null : $this->description;
 
 		if (!$object->save(false))
 			return false;

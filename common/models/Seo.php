@@ -1,6 +1,6 @@
 <?php
 
-namespace seo\common\models;
+namespace cms\seo\common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -16,19 +16,6 @@ class Seo extends ActiveRecord
 	 */
 	public static function tableName() {
 		return 'Seo';
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels() {
-		return [
-			'url' => Yii::t('seo', 'Url'),
-			'title' => Yii::t('seo', 'Title'),
-			'keywords' => Yii::t('seo', 'Keywords'),
-			'description' => Yii::t('seo', 'Description'),
-			'snippet' => Yii::t('seo', 'Snippet'),
-		];
 	}
 
 }
