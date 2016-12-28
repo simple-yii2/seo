@@ -50,7 +50,7 @@ class SeoSearch extends Seo
 		if (!($this->load($params) && $this->validate())) return $dataProvider;
 
 		//search
-		$query->andFilterWhere(['like', 'path', $this->path]);
+		$query->andFilterWhere(['like', 'path', parse_url($this->path)['path']]);
 
 		return $dataProvider;
 	}
