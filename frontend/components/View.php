@@ -3,6 +3,7 @@
 namespace cms\seo\frontend\components;
 
 use Yii;
+use yii\helpers\Url;
 
 use cms\seo\common\models\Seo;
 
